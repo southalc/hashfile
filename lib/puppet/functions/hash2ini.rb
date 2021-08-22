@@ -25,7 +25,7 @@ Puppet::Functions.create_function(:hash2ini) do
       'section_suffix'    => ']',
       'key_val_separator' => '=',
       'quote_char'        => '"',
-      'use_quotes'        => false,
+      'use_quotes'        => true,
       'quote_booleans'    => true,
       'quote_numerics'    => true,
     }
