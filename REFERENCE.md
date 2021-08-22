@@ -121,11 +121,15 @@ hashfile::ini { '/some/file.ini':
 
 The following parameters are available in the `hashfile::ini` defined type.
 
-##### `file_props`
+##### `file`
+
+Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### `data`
+
+Data type: `Hash`
 
 Hash representation of the INI file, to include section names and key/value pairs
 
@@ -136,18 +140,6 @@ Data type: `Hash`
 Optional hash of values to format output. See the "hash2ini" function for details.
 
 Default value: `{}`
-
-##### `file`
-
-Data type: `Hash`
-
-
-
-##### `data`
-
-Data type: `Hash`
-
-
 
 ### `hashfile::json`
 

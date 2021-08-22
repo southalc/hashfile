@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 1.3.1
+
+- Add 'use_quotes' boolean to hash2ini function to control if INI values should be enclosed in quotes. Default is false.
+  This affects the 
+
 ## Release 1.3.0
 
 Forked from 'mmckinst-hash2stuff'
