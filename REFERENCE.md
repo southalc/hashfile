@@ -6,7 +6,7 @@
 
 ### Classes
 
-* [`hashfile`](#hashfile): Create ini, json, yaml, key/value, or Java properties file from a source hash
+* [`hashfile`](#hashfile): Create various file formats from a source hash
 
 ### Defined types
 
@@ -19,7 +19,6 @@
 ### Functions
 
 * [`hash2ini`](#hash2ini): Converts a puppet hash to INI file string.
-* [`hash2json`](#hash2json): Converts a puppet hash to JSON string.
 * [`hash2kv`](#hash2kv): Converts a puppet hash to key/value (SHELLVAR) file string.
 * [`hash2properties`](#hash2properties): Converts a puppet hash to Java properties file string.
 * [`hash2yaml`](#hash2yaml): Converts a puppet hash to YAML string.
@@ -28,7 +27,7 @@
 
 ### `hashfile`
 
-Create ini, json, yaml, key/value, or Java properties file from a source hash
+Create various file formats from a source hash
 
 #### Examples
 
@@ -37,12 +36,12 @@ Create ini, json, yaml, key/value, or Java properties file from a source hash
 ```puppet
 hashfile::ini:
   /tmp/file.ini:
-    file_data:
+    file:
       ensure: file
       owner: root
       group: root
       mode: '0600'
-    data_hash:
+    data:
       section1:
         key1: value1
         key2: value2
@@ -103,14 +102,14 @@ Defined type provides an implementation of the hash2ini function, creating an IN
 ##### 
 
 ```puppet
-hashfile::ini { 'namevar':
-  file_props => {
+hashfile::ini { '/some/file.ini':
+  file => {
     ensure => file,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
   }
-  data_hash  => {
+  data => {
     section1 => {
       key1   => 'value1',
     }
@@ -124,13 +123,9 @@ The following parameters are available in the `hashfile::ini` defined type.
 
 ##### `file_props`
 
-Data type: `Hash`
-
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
 ##### `data_hash`
-
-Data type: `Hash`
 
 Hash representation of the INI file, to include section names and key/value pairs
 
@@ -138,9 +133,21 @@ Hash representation of the INI file, to include section names and key/value pair
 
 Data type: `Hash`
 
-Hash of optional values to pass to the "hash2ini" function.  See the function for details.
+Optional hash of values to format output. See the "hash2ini" function for details.
 
 Default value: `{}`
+
+##### `file`
+
+Data type: `Hash`
+
+
+
+##### `data`
+
+Data type: `Hash`
+
+
 
 ### `hashfile::json`
 
@@ -152,13 +159,13 @@ Defined type provides an implementation of the hash2json function, creating a JS
 
 ```puppet
 hashfile::json { 'namevar':
-  file_props => {
+  file => {
     ensure => file,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
   }
-  data_hash  => {
+  data => {
     section1 => {
       key1   => 'value1',
     }
@@ -170,13 +177,13 @@ hashfile::json { 'namevar':
 
 The following parameters are available in the `hashfile::json` defined type.
 
-##### `file_props`
+##### `file`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### `data`
 
 Data type: `Hash`
 
@@ -192,13 +199,13 @@ Defined type provides an implementation of the hash2kv function, creating a key-
 
 ```puppet
 hashfile::kv { 'namevar':
-  file_props => {
+  file => {
     ensure => file,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
   }
-  data_hash  => {
+  data => {
     section1 => {
       key1   => 'value1',
     }
@@ -210,13 +217,13 @@ hashfile::kv { 'namevar':
 
 The following parameters are available in the `hashfile::kv` defined type.
 
-##### `file_props`
+##### `file`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### `data`
 
 Data type: `Hash`
 
@@ -226,7 +233,7 @@ Hash representation of the key-value/shellvar file.
 
 Data type: `Hash`
 
-Hash of optional values to pass to the "hash2kv" function.  See function for details.
+Hash of optional values to format output file. See "hash2kv" function for details.
 
 Default value: `{}`
 
@@ -240,13 +247,13 @@ Defined type provides an implementation of the hash2properties function, creatin
 
 ```puppet
 hashfile::properties { 'namevar':
-  file_props => {
+  file => {
     ensure => file,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
   }
-  data_hash  => {
+  data => {
     section1 => {
       key1   => 'value1',
     }
@@ -258,13 +265,13 @@ hashfile::properties { 'namevar':
 
 The following parameters are available in the `hashfile::properties` defined type.
 
-##### `file_props`
+##### `file`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### `data`
 
 Data type: `Hash`
 
@@ -274,7 +281,7 @@ Hash representation of the properties file.
 
 Data type: `Hash`
 
-Hash of optional values to pass to the "hash2properties" function.  See function for details.
+Hash of optional values to format output file. See the "hash2properties" function for details.
 
 Default value: `{}`
 
@@ -288,13 +295,13 @@ Defined type provides an implementation of the hash2yaml function, creating a YA
 
 ```puppet
 hashfile::yaml { 'namevar':
-  file_props => {
+  file => {
     ensure => file,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
   }
-  data_hash  => {
+  data  => {
     section1 => {
       key1   => 'value1',
     }
@@ -306,13 +313,13 @@ hashfile::yaml { 'namevar':
 
 The following parameters are available in the `hashfile::yaml` defined type.
 
-##### `file_props`
+##### `file`
 
 Data type: `Hash`
 
 Properties of the target file resource.  Accepts and requires the same parameters of a puppet "file"
 
-##### `data_hash`
+##### `data`
 
 Data type: `Hash`
 
@@ -322,7 +329,7 @@ Hash representation of the YAML file.
 
 Data type: `Hash`
 
-Hash of optional values to pass to the "hash2yaml" function.  See function for details.
+Hash of optional values to format output file. See "hash2yaml" function for details.
 
 Default value: `{}`
 
@@ -367,40 +374,6 @@ The hash to be converted to INI file
 Data type: `Optional[Hash]`
 
 A hash of options to control INI file format
-
-### `hash2json`
-
-Type: Ruby 4.x API
-
-Converts a puppet hash to JSON string.
-
-#### Examples
-
-##### Call the function with the $input hash
-
-```puppet
-hash2json($input)
-```
-
-#### `hash2json(Hash $input)`
-
-The hash2json function.
-
-Returns: `String` A JSON formatted string
-
-##### Examples
-
-###### Call the function with the $input hash
-
-```puppet
-hash2json($input)
-```
-
-##### `input`
-
-Data type: `Hash`
-
-The hash to be converted to JSON
 
 ### `hash2kv`
 
