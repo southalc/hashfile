@@ -1,1 +1,13 @@
---- {}
+---
+lookup_options:
+  hashfile::ini:
+    merge: deep
+  hashfile::kv:
+    merge: deep
+  hashfile::properties:
+    merge: deep
+  hashfile::yaml:
+    merge: deep
+  hashfile::json:
+    merge: deep
+
