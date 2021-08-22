@@ -1,6 +1,6 @@
 {
   "name": "southalc-hashfile",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "author": "Chris Southall",
   "summary": "Convert a puppet hash to YAML, JSON, INI file, or key-value",
   "license": "Apache-2.0",

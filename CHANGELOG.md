@@ -3,7 +3,7 @@
 ## Release 1.3.1
 
 - Add 'use_quotes' boolean to hash2ini function to control if INI values should be enclosed in quotes. Default is false.
-  This affects the 
+  This affects the 'quote_booleans' and 'quote_numerics' options, as 'use_quotes' must be true (not default)
 
 ## Release 1.3.0
 
