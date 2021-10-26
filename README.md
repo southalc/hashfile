@@ -1,4 +1,12 @@
-## Overview
+# hashfile
+
+## Table of Contents
+
+1. [Description](#description)
+1. [Usage](#usage)
+1. [Reference](#reference)
+
+## Description
 
 Forked from [puppet-hash2stuff](https://github.com/mmckinst/puppet-hash2stuff) by Mark McKinstry, which is no longer maintained.
 
@@ -7,6 +15,14 @@ to overwrite an entire config file with one from puppet, if you are trying to ma
 config file, you want to use something like
 [puppetlabs/inifile](https://github.com/puppetlabs/puppetlabs-inifile) or
 [augeas](https://docs.puppet.com/guides/augeas.html).
+
+Supported file formats are ini, json, kv (key/value), properties (java style), and yaml.
+
+The module includes a defined type for each file format and the main module class has a matching
+parameter to support creating any of the supported file types from hiera.  The module does nothing
+when assigned unless hiera data is present.  If you're writing manifests it's probably easier to
+just use the module functions to format the content of a basic file resource than it is to use the
+defined types.
 
 ## Usage
 
@@ -107,12 +123,11 @@ date.timezone = "America/Detroit"
 
 ### `hash2json`
 
-This function overlaps with
-[to_json](https://forge.puppet.com/puppetlabs/stdlib#to_json) and
+This FUNCTION HAS BEEN REMOVED FROM THE MODULE in favor of
 [to_json_pretty](https://forge.puppet.com/puppetlabs/stdlib#to_json_pretty) from
 [puppetlab's stdlib](https://forge.puppet.com/puppetlabs/stdlib).
 
-Converts a hash into a JSON string. *Type*: rvalue.
+This example uses 'to_json_pretty' to convert a hash into a formatted JSON string. *Type*: rvalue.
 
 It is used when you want to overwrite an entire file with a hash of settings. If
 you want to manage bits and pieces of an JSON file, you want
@@ -134,7 +149,7 @@ $config = {
 
 file {'/etc/config.json':
   ensure  => 'present',
-  content => hash2json($config)
+  content => to_json_pretty($config)
 }
 ```
 
