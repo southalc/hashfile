@@ -11,6 +11,10 @@ describe 'hash2ini' do
       'logging' => 'INFO',
       'limit'   => 314,
       'awesome' => true,
+      'dup_key' => [
+        'test1',
+        'test2',
+      ]
     },
     'dev' => {
       'logging'      => 'DEBUG',
@@ -26,6 +30,8 @@ describe 'hash2ini' do
 logging="INFO"
 limit="314"
 awesome="true"
+dup_key="test1"
+dup_key="test2"
 
 [dev]
 logging="DEBUG"
@@ -49,6 +55,8 @@ EOS
 logging: INFO
 limit: 314
 awesome: true
+dup_key: test1
+dup_key: test2
 
 [[dev]]
 logging: DEBUG
@@ -69,6 +77,8 @@ EOS
 logging="INFO"
 limit=314
 awesome=true
+dup_key="test1"
+dup_key="test2"
 
 [dev]
 logging="DEBUG"

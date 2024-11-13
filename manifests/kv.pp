@@ -26,7 +26,7 @@ define hashfile::kv (
   Hash $data,
   Hash $options = {},
 ) {
-  File {$name:
+  File { $name:
     * => merge($file, content => hash2kv($data, $options)),
   }
 }

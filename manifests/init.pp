@@ -23,7 +23,7 @@
 #           key1: value1
 #           key2: value2
 #
-class hashfile  (
+class hashfile (
   Hash $ini = {},
   Hash $json = {},
   Hash $kv = {},
@@ -31,9 +31,9 @@ class hashfile  (
   Hash $yaml = {},
 ) {
   # Create resources from parameter hashes using the defined types
-  $ini.each        |$name, $hash| { Resource['Hashfile::Ini']        { $name: * => $hash, } }
-  $json.each       |$name, $hash| { Resource['Hashfile::Json']       { $name: * => $hash, } }
-  $kv.each         |$name, $hash| { Resource['Hashfile::Kv']         { $name: * => $hash, } }
+  $ini.each        |$name, $hash| { Resource['Hashfile::Ini'] { $name: * => $hash, } }
+  $json.each       |$name, $hash| { Resource['Hashfile::Json'] { $name: * => $hash, } }
+  $kv.each         |$name, $hash| { Resource['Hashfile::Kv'] { $name: * => $hash, } }
   $properties.each |$name, $hash| { Resource['Hashfile::Properties'] { $name: * => $hash, } }
-  $yaml.each       |$name, $hash| { Resource['Hashfile::Yaml']       { $name: * => $hash, } }
+  $yaml.each       |$name, $hash| { Resource['Hashfile::Yaml'] { $name: * => $hash, } }
 }

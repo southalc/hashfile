@@ -38,13 +38,25 @@ Puppet::Functions.create_function(:hash2ini) do
       output << "#{settings['section_prefix']}#{section}#{settings['section_suffix']}"
       input[section].each do |k, v|
         v_is_a_boolean = (v.is_a?(TrueClass) || v.is_a?(FalseClass))
-        output << if !settings['use_quotes'] || (v_is_a_boolean && !settings['quote_booleans']) || (v.is_a?(Numeric) && !settings['quote_numerics'])
-                    "#{k}#{settings['key_val_separator']}#{v}"
-                  elsif settings['use_quotes']
-                    "#{k}#{settings['key_val_separator']}#{settings['quote_char']}#{v}#{settings['quote_char']}"
-                  else
-                    "#{k}#{settings['key_val_separator']}#{v}"
-                  end
+        if v.is_a?(Array)
+          v.each do |dup|
+            output << if !settings['use_quotes'] || (dup.is_a?(Numeric) && !settings['quote_numerics'])
+                        "#{k}#{settings['key_val_separator']}#{dup}"
+                      elsif settings['use_quotes']
+                        "#{k}#{settings['key_val_separator']}#{settings['quote_char']}#{dup}#{settings['quote_char']}"
+                      else
+                        "#{k}#{settings['key_val_separator']}#{dup}"
+                      end
+          end
+        else
+          output << if !settings['use_quotes'] || (v_is_a_boolean && !settings['quote_booleans']) || (v.is_a?(Numeric) && !settings['quote_numerics'])
+                      "#{k}#{settings['key_val_separator']}#{v}"
+                    elsif settings['use_quotes']
+                      "#{k}#{settings['key_val_separator']}#{settings['quote_char']}#{v}#{settings['quote_char']}"
+                    else
+                      "#{k}#{settings['key_val_separator']}#{v}"
+                    end
+        end
       end
       output << nil
     end

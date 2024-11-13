@@ -26,7 +26,7 @@ define hashfile::ini (
   Hash $data,
   Hash $options = {},
 ) {
-  File {$name:
+  File { $name:
     * => merge($file, content => hash2ini($data, $options)),
   }
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## Release 1.4.0
+
+- Updated hash2ini function to support arrays as key values.  This results in an INI file where multiple lines in the
+  same section will have the same key, but may have different values.
+- Updated supported puppet versions and module dependencies.
+
 ## Release 1.3.2
 
 - No functional changes.  Updated documentation to identify that "hash2json" function is removed 

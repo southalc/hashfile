@@ -26,7 +26,7 @@ define hashfile::properties (
   Hash $data,
   Hash $options = {},
 ) {
-  File {$name:
+  File { $name:
     * => merge($file, content => hash2properties($data, $options)),
   }
 }

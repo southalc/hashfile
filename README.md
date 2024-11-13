@@ -10,19 +10,15 @@
 
 Forked from [puppet-hash2stuff](https://github.com/mmckinst/puppet-hash2stuff) by Mark McKinstry, which is no longer maintained.
 
-This module will convert puppet hashes in to different formats commonly used for config files. It is used
-to overwrite an entire config file with one from puppet, if you are trying to manage bits and pieces of a
-config file, you want to use something like
-[puppetlabs/inifile](https://github.com/puppetlabs/puppetlabs-inifile) or
-[augeas](https://docs.puppet.com/guides/augeas.html).
+This module will convert puppet hashes to different common file formats. It is used to overwrite an entire
+file with one from puppet, if you are trying to manage bits and pieces of a config file, you want to use
+something like [puppetlabs/inifile](https://github.com/puppetlabs/puppetlabs-inifile) or [augeas](https://docs.puppet.com/guides/augeas.html).
 
 Supported file formats are ini, json, kv (key/value), properties (java style), and yaml.
 
 The module includes a defined type for each file format and the main module class has a matching
 parameter to support creating any of the supported file types from hiera.  The module does nothing
-when assigned unless hiera data is present.  If you're writing manifests it's probably easier to
-just use the module functions to format the content of a basic file resource than it is to use the
-defined types.
+when assigned unless hiera data is present.
 
 ## Usage
 
@@ -32,6 +28,10 @@ Converts a hash into an [INI file format](https://en.wikipedia.org/wiki/INI_file
 
 It is used when you want to overwrite an entire file with a hash of settings. If you want to manage bits and
 pieces of an INI file, you want [puppetlabs/inifile](https://github.com/puppetlabs/puppetlabs-inifile).
+
+Note that version 1.4.0 and later of the module supports arrays as key values.  This results in an INI file
+where multiple lines in the same section will have the same key, but may have different values.  See the
+example below.
 
 #### Parameters
 
@@ -51,6 +51,7 @@ $config = {
     'logging' => 'INFO',
     'limit'   => 314,
     'awesome' => true,
+    'dup_key' => ['value1', 'value2'],
   },
   'dev' => {
     'logging'      => 'DEBUG',
@@ -73,6 +74,8 @@ will produce a file at /etc/config.ini that looks like:
 logging="INFO"
 limit="314"
 awesome="true"
+dup_key="value1"
+dup_key="value2"
 
 [dev]
 logging="DEBUG"

@@ -23,7 +23,7 @@ define hashfile::json (
   Hash $file,
   Hash $data,
 ) {
-  File {$name:
+  File { $name:
     * => merge($file, content => to_json_pretty($data)),
   }
 }

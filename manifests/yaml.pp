@@ -26,7 +26,7 @@ define hashfile::yaml (
   Hash $data,
   Hash $options = {},
 ) {
-  File {$name:
+  File { $name:
     * => merge($file, content => hash2yaml($data, $options)),
   }
 }
